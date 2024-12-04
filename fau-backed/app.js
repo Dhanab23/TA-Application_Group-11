@@ -22,7 +22,11 @@ const app = express()
 //db connection
 mongoose.connect(
   process.env.DATABASE,
-  { useNewUrlParser: true, useUnifiedTopology: true ,family:4,},
+  { useNewUrlParser: true,
+  useUnifiedTopology: true,
+  ssl: true, // Ensure SSL is enabled
+  retryWrites: true,
+  w: 'majority'},
 )
   .then(() => console.log('DB Connected'))
 
@@ -46,6 +50,11 @@ app.use("/api",courseRoutes);
 app.use("/api",applicationRoutes);
 app.use("/api",performanceRoutes);
 
+app.use(cors({
+  origin: 'https://campushires-fau.vercel.app', // Adjust to match your frontend's domain
+  methods: ['GET', 'POST'],
+  credentials: true
+}));
 
 const port = process.env.PORT || 8000
 
