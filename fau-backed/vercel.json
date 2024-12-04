@@ -16,4 +16,5 @@
     "api/backend.js": {
       "timeout": 30
     }
+  }
 }
