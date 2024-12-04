@@ -16,7 +16,14 @@ const performanceRoutes = require('./routes/performance');
 //app 
 const app = express()
 //db 
-
+//cors
+const corsConfig={
+  origin:"*",
+  credential:true,
+  methods:["GET "PUT" "POST" "DELETE"],
+}
+app.options("",cors(corsConfig));
+app.use(cors(corsConfig))
 // load env variables
 
 //db connection
@@ -39,7 +46,7 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(expressValidator());
-app.use(cors());
+// app.use(cors());
 
 app.use(express.json()); // to parse application/json
 
@@ -50,11 +57,6 @@ app.use("/api",courseRoutes);
 app.use("/api",applicationRoutes);
 app.use("/api",performanceRoutes);
 
-app.use(cors({
-  origin: 'https://campushires-fau.vercel.app', // Adjust to match your frontend's domain
-  methods: ['GET', 'POST'],
-  credentials: true
-}));
 
 const port = process.env.PORT || 8000
 
