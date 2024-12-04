@@ -12,4 +12,8 @@
       "dest": "app.js"
     }
   ]
+  "functions": {
+    "api/backend.js": {
+      "timeout": 30
+    }
 }
