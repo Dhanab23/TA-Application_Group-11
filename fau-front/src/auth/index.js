@@ -30,7 +30,7 @@ export const signin = (user) => {
 
 // OTP verification function
 export const verifyOtp = (data) => {
-    return fetch('http://localhost:8000/api/verify-otp', {
+    return fetch(`${API}/verify-otp`, {
         method: 'POST',
         headers: {
             Accept: 'application/json',
@@ -73,7 +73,7 @@ export const signout = (next) => {
     if (typeof window !== 'undefined') {
         localStorage.removeItem('jwt');
         next();
-        return fetch('http://localhost:8000/api/signout', {
+        return fetch(`${API}/api/signout`, {
             method: 'GET',
         })
         .then(() => console.log('Signout successful'))
@@ -84,7 +84,7 @@ export const signout = (next) => {
 
 // Request password reset OTP
 export const forgotPassword = (email) => {
-    return fetch(`http://localhost:8000/api/forgot-password`, {
+    return fetch(`${API}/forgot-password`, {
         method: "POST",
         headers: {
             Accept: "application/json",
@@ -98,7 +98,7 @@ export const forgotPassword = (email) => {
 
 // Reset password with OTP
 export const resetPassword = (email, otp, newPassword) => {
-    return fetch(`http://localhost:8000/api/reset-password`, {
+    return fetch(`${API}/reset-password`, {
         method: "POST",
         headers: {
             Accept: "application/json",
